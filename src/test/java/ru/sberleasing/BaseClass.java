@@ -12,11 +12,9 @@ public class BaseClass {
      */
     @BeforeEach
     public void option(){
-        Configuration.timeout = 10000;
         Configuration.browser="chrome";
+        Configuration.pageLoadTimeout = 100000;
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-extensions");
-        options.addArguments("--incognito");
         options.addArguments("--disable-cookie-encryption");
         Configuration.browserCapabilities = options;
         System.setProperty("webdriver.chrome.driver",System.getenv("CHROME_DRIVER"));

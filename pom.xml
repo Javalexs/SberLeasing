@@ -13,11 +13,11 @@
         <maven.compiler.target>19</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.jupiter.version>5.7.0-M1</junit.jupiter.version>
-        <seleniumhq.selenium>4.25.0</seleniumhq.selenium>
+        <seleniumhq.selenium>4.27.0</seleniumhq.selenium>
         <qameta.allure>2.13.6</qameta.allure>
         <aspectj.version>1.9.4</aspectj.version>
         <allure.version>2.13.6</allure.version>
-        <selenide>7.5.1</selenide>
+        <selenide>7.3.2</selenide>
         <owner>1.0.4</owner>
         <rest-assured>5.3.0</rest-assured>
         <commons-io>2.4</commons-io>

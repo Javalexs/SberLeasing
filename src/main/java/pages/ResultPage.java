@@ -1,11 +1,13 @@
 package pages;
 
 import com.codeborne.selenide.ClickOptions;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
 import java.time.Duration;
+import java.util.List;
 
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.visible;
@@ -26,6 +28,14 @@ public class ResultPage {
 
     By startSlider = By.xpath(".//div[@aria-label = 'pick start value']");
 
+    SelenideElement colorDropDown = $x("//input[@class = 'sbl-filter-block__search-string' and @placeholder = 'Выберите или введите']");
+
+    ElementsCollection allResultsName = $$x("//div[contains(@class,'fs-14')]");
+
+    ElementsCollection viewOffers = $$x("//div[@class = 'car-card__item-order-buttons']");
+
+    SelenideElement nameSelectOffer = $x("//h1[@class = 'h2']");
+
 
     public SelenideElement checkBox (String text) {
         return $x(String.format("//div[contains(@class, 'horizontal-filter-block__checkboxes-item') and contains(., '%s')]/input[@type = 'checkbox']", text));
@@ -35,9 +45,8 @@ public class ResultPage {
         return $x (String.format("//div[@class = 'checkboxes-body-type__label' and contains(., '%s')]", text));
     }
 
-    public ResultPage selectColor () {
-        $x("//input[@class = 'sbl-filter-block__search-string' and @placeholder = 'Выберите или введите']").shouldHave(visible, enabled).selectOptionContainingText("бежевый");
-        Selenide.sleep(10000);
+    public ResultPage selectColor (String text) {
+        colorDropDown.scrollIntoView(false).shouldHave(visible, enabled).setValue(text);
         return this;
     }
 
@@ -51,7 +60,7 @@ public class ResultPage {
         return this;
     }
 
-    public ResultPage selectCarDrive(String text) {
+    public ResultPage selectOptions(String text) {
        if(!checkBox(text).isSelected()){
            checkBox(text).click(ClickOptions.usingJavaScript());
        }
@@ -64,4 +73,16 @@ public class ResultPage {
         return this;
     }
 
+    public List<String> getAllNameResults () {
+        return allResultsName.texts();
+    }
+
+    public ResultPage viewOffersButtonClick() {
+        viewOffers.first().shouldHave(visible, enabled).click();
+        return this;
+    }
+
+    public String getNameSelectedOffer() {
+        return nameSelectOffer.getText();
+    }
 }
