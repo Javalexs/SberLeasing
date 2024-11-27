@@ -1,21 +1,20 @@
 package io.swagger.petstore;
 
 import dto.RequestBody;
-import io.qameta.allure.Step;
-import io.restassured.response.Response;
+import dto.ResponseGetBody;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static spec.Specification.requestSpec;
-import static spec.Specification.responceSpec200;
+import static spec.Specification.responseSpec;
 
 public class CrudApiTests {
 
-    Response response;
-    @Step ("Создание произвольного пользователя")
-    @DisplayName("Создания нового пользователя с параметрами")
+    @DisplayName("Создание нового пользователя с параметрами")
     @ParameterizedTest(name = "{displayName}: {arguments}")
     @MethodSource("helpers.DataProvider#providerParametersCreateTest")
     public void createTest(int id, String userName, String firstName, String lastName, String email, String password, String phone, int status) {
@@ -37,7 +36,8 @@ public class CrudApiTests {
                 .post("/user")
                 .then()
                 .log().body()
-                .spec(responceSpec200());
+                .spec(responseSpec());
+
     }
 
     @DisplayName("Изменение данных созданного пользователя с параметрами")
@@ -61,23 +61,37 @@ public class CrudApiTests {
                 .put("/user/"+ userName)
                 .then()
                 .log().body()
-                .spec(responceSpec200());
+                .spec(responseSpec());
     }
-    @DisplayName("Получение информации по пользователю с параметром")
+
+    @DisplayName("Получение информации по пользователю с параметрами")
     @ParameterizedTest(name = "{displayName}: {arguments}")
-    @MethodSource("helpers.DataProvider#providerParametersUserName")
-    public void getTest(String userName) {
-        given()
+    @MethodSource("helpers.DataProvider#providerParametersUpdateTest")
+    public void getTest(int id, String userName, String firstName, String lastName, String email, String password, String phone, int status) {
+        ResponseGetBody respGet = given()
                 .spec(requestSpec())
                 .when()
                 .get("/user/"+ userName)
                 .then()
                 .log().body()
-                .spec(responceSpec200());
+                .statusCode(200)
+                .extract().body().as(ResponseGetBody.class);
+
+        String notEqual = " в теле запроса не совпадает с ожидаемым";
+        assertAll(
+                () -> assertEquals(respGet.getId(), id, "Идентификатор" + notEqual),
+                () -> assertEquals(respGet.getUsername(), userName, "Логин пользователя" + notEqual),
+                () -> assertEquals(respGet.getFirstName(), firstName, "Имя пользователя" + notEqual),
+                () -> assertEquals(respGet.getLastName(), lastName, "Фамилия пользователя" + notEqual),
+                () -> assertEquals(respGet.getEmail(), email, "Электронная почта" + notEqual),
+                () -> assertEquals(respGet.getPassword(), password, "Пароль пользователя" + notEqual),
+                () -> assertEquals(respGet.getPhone(), phone, "Номер телефона пользователя" + notEqual),
+                () -> assertEquals(respGet.getUserStatus(), status, "Статус" + notEqual)
+        );
     }
-    @DisplayName("Удалить пользователя с параметром")
+    @DisplayName("Удаление пользователя с параметром")
     @ParameterizedTest(name = "{displayName}: {arguments}")
-    @MethodSource("helpers.DataProvider#providerParametersUserName")
+    @MethodSource("helpers.DataProvider#providerParametersDeleteTest")
     public void deleteTest(String userName){
         given()
                 .spec(requestSpec())
@@ -85,6 +99,6 @@ public class CrudApiTests {
                 .delete("/user/"+ userName)
                 .then()
                 .log().body()
-                .spec(responceSpec200());
+                .spec(responseSpec());
     }
 }

@@ -27,7 +27,7 @@ public class DataProvider {
         );
     }
 
-    public static Stream<Arguments> providerParametersUserName() {
+    public static Stream<Arguments> providerParametersDeleteTest() {
         return Stream.of(
                 Arguments.of("Шариков")
         );

@@ -5,6 +5,8 @@ import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
+import static org.hamcrest.Matchers.isA;
+
 public class Specification {
     public static RequestSpecification requestSpec(){
         return new RequestSpecBuilder()
@@ -12,14 +14,14 @@ public class Specification {
                 .setContentType("application/json")
                 .build();
     }
-    public static ResponseSpecification responceSpec200(){
+
+    public static ResponseSpecification responseSpec(){
         return new ResponseSpecBuilder()
                 .expectStatusCode(200)
-                .build();
-    }
-    public static ResponseSpecification responceSpec400(){
-        return new ResponseSpecBuilder()
-                .expectStatusCode(400)
+                .expectContentType("application/json")
+                .expectBody("code", isA(Integer.class))
+                .expectBody("type", isA(String.class))
+                .expectBody("message", isA(String.class))
                 .build();
     }
 }
