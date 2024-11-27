@@ -30,14 +30,15 @@ public class Tests {
         open(Properties.testsProperties.googleUrl(), GooglePage.class)
                 .inputValueinSearch("СберЛизинг")
                 .goSberLeasingSite()
-                .selectParametrsButtonClick();
+                .checkTitle("Сбербанк Лизинг")
+                .selectParametersButtonClick();
 
                 rp.selectOptions(nameDriver)
                         .selectOptions(fuel)
                         .selectOptions(transmission)
                         .selectTypeBody(typeBody)
                         .selectColor(color)
-                        .selectParametersButtonClick();
+                        .showAllOffersButtonClick();
 
                 List<String> expectedNames = rp.getAllNameResults();
                 String actualName = rp.viewOffersButtonClick().getNameSelectedOffer();

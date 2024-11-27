@@ -6,31 +6,21 @@ import helpers.Properties;
 
 import static com.codeborne.selenide.Selenide.*;
 
+/**
+ * Класс страницы Google
+ */
 public class GooglePage {
 
+    // Строка поиска google
     SelenideElement googleSearch = $x("//textarea[@title = 'Поиск']");
 
-    ElementsCollection googleSearchButtons = $$x("//input[@value = 'Поиск в Google']");
-
     /**
-     * Метод переходит на сайт Google.ru
-     * @author Алексей Фадеев
-     * @return
-     */
-
-//    public GooglePage gotoSite() {
-//        open(Properties.testsProperties.googleUrl(), GooglePage.class);
-//        return this;
-//    }
-
-    /**
-     * Метод вводит значение и нажимает кнопку поиска
+     * Метод вводит значение и нажимает кнопку поиска в google
      * @author Алексей Фадеев
      * @return
      */
     public GoogleResultSearchPage inputValueinSearch(String text) {
         googleSearch.setValue(text).pressEnter();
-//        googleSearchButtons.last().;
         return page(GoogleResultSearchPage.class);
     }
 }
