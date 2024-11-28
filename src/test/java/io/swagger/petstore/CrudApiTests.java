@@ -23,7 +23,7 @@ public class CrudApiTests {
     @DisplayName("Создание нового пользователя с параметрами")
     @ParameterizedTest(name = "{displayName}: {arguments}")
     @MethodSource("helpers.DataProvider#providerParametersCreateTest")
-    public void createTest(int id, String userName, String firstName, String lastName, String email, String password, String phone, int status) {
+    public void createUserTest(int id, String userName, String firstName, String lastName, String email, String password, String phone, int status) {
         rb.setId(id);
         rb.setUsername(userName);
         rb.setFirstName(firstName);
@@ -41,13 +41,12 @@ public class CrudApiTests {
                 .then()
                 .log().body()
                 .spec(responseSpec());
-
     }
 
     @DisplayName("Изменение данных созданного пользователя с параметрами")
     @ParameterizedTest(name = "{displayName}: {arguments}")
     @MethodSource("helpers.DataProvider#providerParametersUpdateTest")
-    public void updateTest(int id, String userName, String firstName, String lastName, String email, String password, String phone, int status) {
+    public void updateUserTest(int id, String userName, String firstName, String lastName, String email, String password, String phone, int status) {
         rb.setId(id);
         rb.setUsername(userName);
         rb.setFirstName(firstName);
@@ -70,7 +69,7 @@ public class CrudApiTests {
     @DisplayName("Получение информации по пользователю с параметрами")
     @ParameterizedTest(name = "{displayName}: {arguments}")
     @MethodSource("helpers.DataProvider#providerParametersUpdateTest")
-    public void getTest(int id, String userName, String firstName, String lastName, String email, String password, String phone, int status) {
+    public void getUserTest(int id, String userName, String firstName, String lastName, String email, String password, String phone, int status) {
         ResponseGetBody respGet = given()
                 .spec(requestSpec())
                 .when()
@@ -78,9 +77,10 @@ public class CrudApiTests {
                 .then()
                 .log().body()
                 .statusCode(200)
+                .contentType("application/json")
                 .extract().body().as(ResponseGetBody.class);
 
-        String notEqual = " в теле запроса не совпадает с ожидаемым";
+        String notEqual = " в теле ответа не совпадает с ожидаемым";
         assertAll(
                 () -> assertEquals(respGet.getId(), id, "Идентификатор" + notEqual),
                 () -> assertEquals(respGet.getUsername(), userName, "Логин пользователя" + notEqual),
@@ -92,10 +92,11 @@ public class CrudApiTests {
                 () -> assertEquals(respGet.getUserStatus(), status, "Статус" + notEqual)
         );
     }
+
     @DisplayName("Удаление пользователя с параметром")
     @ParameterizedTest(name = "{displayName}: {arguments}")
     @MethodSource("helpers.DataProvider#providerParametersDeleteTest")
-    public void deleteTest(String userName){
+    public void deleteUserTest(String userName){
         given()
                 .spec(requestSpec())
                 .when()

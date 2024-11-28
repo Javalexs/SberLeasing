@@ -55,6 +55,12 @@
             <version>${seleniumhq.selenium}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-devtools-v131</artifactId>
+            <version>${seleniumhq.selenium}</version> <!-- Use the version compatible with your Selenium version -->
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-junit5 -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
@@ -66,7 +72,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok}</version>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
