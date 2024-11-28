@@ -12,14 +12,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static spec.Specification.requestSpec;
 import static spec.Specification.responseSpec;
 
+/**
+ * Класс тестов для "https://petstore.swagger.io/"
+ */
 public class CrudApiTests {
+
+    //Переменная класса тела запроса
+    private static RequestBody rb = new RequestBody();
 
     @DisplayName("Создание нового пользователя с параметрами")
     @ParameterizedTest(name = "{displayName}: {arguments}")
     @MethodSource("helpers.DataProvider#providerParametersCreateTest")
     public void createTest(int id, String userName, String firstName, String lastName, String email, String password, String phone, int status) {
-
-        RequestBody rb = new RequestBody();
         rb.setId(id);
         rb.setUsername(userName);
         rb.setFirstName(firstName);
@@ -44,7 +48,6 @@ public class CrudApiTests {
     @ParameterizedTest(name = "{displayName}: {arguments}")
     @MethodSource("helpers.DataProvider#providerParametersUpdateTest")
     public void updateTest(int id, String userName, String firstName, String lastName, String email, String password, String phone, int status) {
-        RequestBody rb = new RequestBody();
         rb.setId(id);
         rb.setUsername(userName);
         rb.setFirstName(firstName);

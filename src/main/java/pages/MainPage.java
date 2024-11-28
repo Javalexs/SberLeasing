@@ -1,19 +1,12 @@
 package pages;
 
-import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.WebDriverRunner;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$x;
 
 /**
  * Класс главной страницы сайта СберЛизинг
@@ -45,7 +38,7 @@ public class MainPage {
      */
     public MainPage selectParametersButtonClick() {
         cookieAccept();
-        selectParametersButton.shouldHave(visible, Duration.ofSeconds(90000)).click();
+        selectParametersButton.shouldHave(visible, Duration.ofSeconds(600000)).click();
         return this;
     }
 
@@ -54,7 +47,6 @@ public class MainPage {
      * @author Алексей Фадеев
      */
     private void cookieAccept() {
-        acceptAllCookieButton.shouldHave(visible, Duration.ofSeconds(90000)).click();
+        acceptAllCookieButton.shouldHave(visible, Duration.ofSeconds(600000)).click();
     }
-
 }

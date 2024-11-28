@@ -2,7 +2,6 @@ package pages;
 
 import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
@@ -33,6 +32,34 @@ public class ResultPage {
 
     //Название выбранного элемента
     SelenideElement nameSelectOffer = $x("//h1[@class = 'h2']");
+
+    //Селектор слайдера Мощность двигателя
+    SelenideElement sliderPowerEngine = $x("//div[contains(@class, 'col-lg-4') and contains(., 'Мощность двигателя')]");
+
+    //Селектор слайдера Объем двигателя
+    SelenideElement sliderVolumeEngine = $x("//div[contains(@class, 'col-lg-4') and contains(., 'Объём двигателя')]");
+
+    //Селектор правого бегунка слайдера
+    By endSlider = By.xpath(".//div[@aria-label = 'pick end value']");
+
+    /**
+     * Метод изменяет параметры слайдера Мощность двигателя
+     * @author Алексей Фадеев
+     */
+    public ResultPage sliderVolumeEngine() {
+        actions().moveToElement(sliderVolumeEngine.$(endSlider)).clickAndHold().moveByOffset(-130, 0).release().perform();
+        return this;
+    }
+
+    /**
+     * Метод изменяет параметры слайдера Мощность двигателя
+     * @author Алексей Фадеев
+     */
+    public ResultPage sliderPowerEngine() {
+        actions().moveToElement(sliderPowerEngine.$(endSlider)).clickAndHold().moveByOffset(-100, 0).release().perform();
+        sleep(3000);
+        return this;
+    }
 
     /**
      * Метод возвращает элемент чекбокса для Тип топлива, Привод, Коробка передач
@@ -67,7 +94,7 @@ public class ResultPage {
      * @author Алексей Фадеев
      */
     public ResultPage showAllOffersButtonClick() {
-        showAllOffersButton.shouldHave(visible).scrollIntoView("{block: 'end'}").click();
+        showAllOffersButton.shouldHave(visible, Duration.ofSeconds(600)).scrollIntoView(false).click();
         return this;
     }
 

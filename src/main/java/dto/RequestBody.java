@@ -3,6 +3,10 @@ package dto;
 import lombok.Getter;
 import lombok.Setter;
 
+
+/**
+ * Класс для тела запроса
+ */
 @Getter
 @Setter
 public class RequestBody{

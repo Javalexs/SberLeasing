@@ -13,26 +13,32 @@ import java.util.List;
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Класс тестов для "https://sberleasing.ru"
+ */
 public class Tests {
 
+    //Переменная класса страницы поиска автомобиля по параметрам
     private static ResultPage rp = new ResultPage();
 
-    @Feature("Проверка функций на сайте sberleasing.ru")
-    @DisplayName("Проверка различных функций на сайте sberleasing.ru для параметров")
+    @Feature("Проверка поиска на сайте sberleasing.ru")
+    @DisplayName("Проверка поиска автомобиля на сайте sberleasing.ru для параметров")
     @ParameterizedTest(name = "{displayName}: {arguments}")
     @MethodSource("helpers.DataProvider#providerParameters")
-    public void leasingSearchParametrsTest(String nameDriver, String fuel, String transmission, String typeBody, String color){
+    public void leasingSearchParametrsTest(String nameBank, String header, String nameDriver, String fuel, String transmission, String typeBody, String color){
         open(Properties.testsProperties.googleUrl(), GooglePage.class)
-                .inputValueinSearch("СберЛизинг")
+                .inputValueInSearch(nameBank)
                 .goSberLeasingSite()
-                .checkTitle("Сбербанк Лизинг")
+                .checkTitle(header)
                 .selectParametersButtonClick();
 
                 rp.selectOptions(nameDriver)
-                        .selectOptions(fuel)
                         .selectOptions(transmission)
+                        .selectOptions(fuel)
                         .selectTypeBody(typeBody)
                         .selectColor(color)
+                        .sliderVolumeEngine()
+                        .sliderPowerEngine()
                         .showAllOffersButtonClick();
 
                 List<String> expectedNames = rp.getAllNameResults();

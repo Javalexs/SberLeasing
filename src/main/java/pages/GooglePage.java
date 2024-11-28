@@ -1,10 +1,9 @@
 package pages;
 
-import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import helpers.Properties;
 
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.page;
 
 /**
  * Класс страницы Google
@@ -19,7 +18,7 @@ public class GooglePage {
      * @author Алексей Фадеев
      * @return
      */
-    public GoogleResultSearchPage inputValueinSearch(String text) {
+    public GoogleResultSearchPage inputValueInSearch(String text) {
         googleSearch.setValue(text).pressEnter();
         return page(GoogleResultSearchPage.class);
     }

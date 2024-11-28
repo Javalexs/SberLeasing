@@ -4,14 +4,14 @@ import org.junit.jupiter.params.provider.Arguments;
 
 import java.util.stream.Stream;
 
+/**
+ * Класс с параметрами
+ */
 public class DataProvider {
-    /**
-     * Метод для передачи параметров в тест
-     * @author Алексей Фадеев
-     */
+
     public static Stream<Arguments> providerParameters() {
         return Stream.of(
-                Arguments.of("передний", "бензин", "автомат", "универсал", "белый")
+                Arguments.of("СберЛизинг", "Сбербанк Лизинг", "передний", "бензин", "автомат", "универсал", "белый")
         );
     }
 
@@ -32,5 +32,4 @@ public class DataProvider {
                 Arguments.of("Шариков")
         );
     }
-
 }
