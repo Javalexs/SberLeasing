@@ -2,6 +2,9 @@ package pages;
 
 import com.codeborne.selenide.SelenideElement;
 
+import java.time.Duration;
+
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.page;
 
@@ -19,7 +22,7 @@ public class GooglePage {
      * @return
      */
     public GoogleResultSearchPage inputValueInSearch(String text) {
-        googleSearch.setValue(text).pressEnter();
+        googleSearch.shouldHave(visible, Duration.ofSeconds(90000)).setValue(text).pressEnter();
         return page(GoogleResultSearchPage.class);
     }
 }

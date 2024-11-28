@@ -20,11 +20,7 @@ public class BaseClass {
         Configuration.browser="chrome";
         Configuration.pageLoadTimeout = 600000;
         ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--headless");
-//        options.addArguments("--disable-gpu");
-//        options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
-//        options.addArguments("--disable-cookie-encryption");
         Configuration.browserCapabilities = options;
         System.setProperty("webdriver.chrome.driver",System.getenv("CHROME_DRIVER"));
     }

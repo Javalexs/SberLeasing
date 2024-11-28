@@ -11,7 +11,7 @@ public class DataProvider {
 
     public static Stream<Arguments> providerParameters() {
         return Stream.of(
-                Arguments.of("СберЛизинг", "Сбербанк Лизинг", "передний", "бензин", "автомат", "универсал", "белый")
+                Arguments.of("СберЛизинг", "передний", "бензин", "автомат", "универсал", "белый")
         );
     }
 

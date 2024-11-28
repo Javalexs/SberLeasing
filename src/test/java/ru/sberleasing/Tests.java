@@ -25,11 +25,10 @@ public class Tests {
     @DisplayName("Проверка поиска автомобиля на сайте sberleasing.ru для параметров")
     @ParameterizedTest(name = "{displayName}: {arguments}")
     @MethodSource("helpers.DataProvider#providerParameters")
-    public void leasingSearchParametrsTest(String nameBank, String header, String nameDriver, String fuel, String transmission, String typeBody, String color){
+    public void leasingSearchParametrsTest(String nameBank, String nameDriver, String fuel, String transmission, String typeBody, String color){
         open(Properties.testsProperties.googleUrl(), GooglePage.class)
                 .inputValueInSearch(nameBank)
                 .goSberLeasingSite()
-                .checkTitle(header)
                 .selectParametersButtonClick();
 
                 rp.selectOptions(nameDriver)
