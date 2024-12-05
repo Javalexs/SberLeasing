@@ -55,12 +55,6 @@
             <version>${seleniumhq.selenium}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-devtools-v131</artifactId>
-            <version>${seleniumhq.selenium}</version> <!-- Use the version compatible with your Selenium version -->
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-junit5 -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
@@ -93,12 +87,6 @@
             <version>${commons-io}</version>
         </dependency>
 
-        <!-- Для пропертей -->
-        <dependency>
-            <groupId>org.aeonbits.owner</groupId>
-            <artifactId>owner</artifactId>
-            <version>${owner}</version>
-        </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.codeborne/selenide -->
         <dependency>
