@@ -3,7 +3,7 @@ package ru.sberleasing;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 /**
@@ -11,18 +11,19 @@ import org.openqa.selenium.chrome.ChromeOptions;
  */
 public class BaseClass {
 
+
     /**
      * Установка необходимых опций
      * @author Алексей Фадеев
      */
-    @BeforeEach
-    public void option(){
+    @BeforeAll
+    public static void option(){
         Configuration.browser="chrome";
         Configuration.pageLoadTimeout = 600000;
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--disable-extensions");
+        options.addArguments("--disable-cookie-encryption");
         Configuration.browserCapabilities = options;
-        System.setProperty("webdriver.chrome.driver",System.getenv("CHROME_DRIVER"));
     }
 
     /**

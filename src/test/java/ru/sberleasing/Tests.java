@@ -16,10 +16,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Класс тестов для "https://sberleasing.ru"
  */
-public class Tests {
+public class Tests extends BaseClass {
 
     //Переменная класса страницы поиска автомобиля по параметрам
-    private static ResultPage rp = new ResultPage();
+    private static ResultPage resultPage = new ResultPage();
 
     @Feature("Проверка поиска на сайте sberleasing.ru")
     @DisplayName("Проверка поиска автомобиля на сайте sberleasing.ru для параметров")
@@ -27,11 +27,11 @@ public class Tests {
     @MethodSource("helpers.DataProvider#providerParameters")
     public void leasingSearchParametrsTest(String nameBank, String nameDriver, String fuel, String transmission, String typeBody, String color){
         open(Properties.testsProperties.googleUrl(), GooglePage.class)
-                .inputValueInSearch(nameBank)
-                .goSberLeasingSite()
-                .selectParametersButtonClick();
+                        .inputValueInSearch(nameBank)
+                        .goSberLeasingSite()
+                        .selectParametersButtonClick();
 
-                rp.selectOptions(nameDriver)
+                resultPage.selectOptions(nameDriver)
                         .selectOptions(transmission)
                         .selectOptions(fuel)
                         .selectTypeBody(typeBody)
@@ -40,8 +40,8 @@ public class Tests {
                         .sliderPowerEngine()
                         .showAllOffersButtonClick();
 
-                List<String> expectedNames = rp.getAllNameResults();
-                String actualName = rp.viewOffersButtonClick().getNameSelectedOffer();
+                List<String> expectedNames = resultPage.getAllNameResults();
+                String actualName = resultPage.viewOffersButtonClick().getNameSelectedOffer();
 
         assertTrue(expectedNames.contains(actualName), "Выбранная марка автомобиля не соответствует марке в общем списке");
     }
