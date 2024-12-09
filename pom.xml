@@ -23,7 +23,7 @@
         <commons-io>2.4</commons-io>
         <jackson-databind>2.9.7</jackson-databind>
         <jsoup>1.13.1</jsoup>
-        <lombok>1.18.20</lombok>
+        <lombok>1.18.30</lombok>
     </properties>
 
     <dependencies>
